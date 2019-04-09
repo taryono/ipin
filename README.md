@@ -1,0 +1,2 @@
+# ipin
+Aplikasi persediaan barang
