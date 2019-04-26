@@ -70,7 +70,7 @@
                                         <th>Keterangan</th>     
                                         <th>Tanggal Permintaan</th>
                                         <th>Total </th>
-                                        <th>Tanggal kirim</th>  
+                                        <th>Request Tanggal kirim</th>  
                                         <th>Status Permintaan</th>
                                         <th>Aksi</th>  
                                     </tr> 

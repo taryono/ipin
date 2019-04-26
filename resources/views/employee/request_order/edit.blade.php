@@ -4,9 +4,8 @@
     <div class="form-group">
         <label for="department_id" class="col-md-3 control-label">Dari Department :</label> 
         <div class="col-md-6">
-            <select id="department_id" name="department_id" class="form-control example-getting-started">  
-                <option value="">-- Pilih Department --</option> 
-                @foreach($departments as $c)
+            <select id="department_id" name="department_id" class="form-control example-getting-started">   
+                @foreach($department_from as $c)
                 <option value="{{$c->id}}" {{$request_order->department_id == $c->id?'selected="selected"':''}}>{{ucfirst($c->name)}}</option> 
                 @endforeach
             </select>
