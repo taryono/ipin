@@ -13,6 +13,8 @@
                                 <th width="10px">No</th>
                                 <th width="10px">Nama</th> 
                                 <th width="10px">Email</th> 
+                                <th width="10px">Jabatan</th>
+                                <th width="10px">Deparmtent</th>
                                 <th width="10px">Alamat</th>  
                                 <th width="10px">Aksi</th>  
                             </tr> 
@@ -23,6 +25,8 @@
                                 <th width="10px">{{++$key}}</th>
                                 <th width="10px">{{$c->name}}</th>  
                                 <th width="10px">{{$c->email}}</th>
+                                <th width="10px">{{$c->position?$c->position->name:NULL}}</th>
+                                <th width="10px">{{$c->department?$c->department->name:NULL}}</th>
                                 <th width="10px">{{$c->address}}</th>
                                 <th width="10px">{!!getActions('employee','edit', $c->id)?getActions('employee','edit', $c->id):NULL!!}&nbsp;{!!getActions('employee','destroy', $c->id)?getActions('employee','destroy', $c->id):NULL!!}</th> 
                             </tr>

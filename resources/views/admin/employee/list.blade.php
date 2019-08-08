@@ -19,6 +19,8 @@
                                         <th>No</th>
                                         <th>Nama</th> 
                                         <th>Email</th> 
+                                        <th>Jabatan</th>
+                                        <th>Deparmtent</th>
                                         <th>Alamat</th>  
                                         <th>Aksi</th>  
                                     </tr> 
@@ -30,8 +32,10 @@
                                         <th>{{++$key}}</th>
                                         <th>{{$c->user_detail?$c->user_detail->first_name:NULL}} &nbsp; {{$c->user_detail?$c->user_detail->last_name:NULL}}</th>  
                                         <th>{{$c->email}}</th>
+                                        <th>{{$c->user_detail->position?$c->user_detail->position->name:NULL}}</th>
+                                        <th>{{$c->user_detail->department?$c->user_detail->department->name:NULL}}</th>
                                         <th>{{$c->user_detail?$c->user_detail->address:NULL}}</th>
-                                        <th>{!!getActions('employee','edit', $c->id)?getActions('employee','edit', $c->id):NULL!!}&nbsp;{!!getActions('employee','destroy', $c->id)?getActions('employee','destroy', $c->id):NULL!!}</th> 
+                                        <th nowrap="nowrap">{!!getActions('employee','edit', $c->id)?getActions('employee','edit', $c->id):NULL!!}&nbsp;{!!getActions('employee','destroy', $c->id)?getActions('employee','destroy', $c->id):NULL!!}</th> 
                                     </tr>
                                     @endforeach
                                 </tbody>

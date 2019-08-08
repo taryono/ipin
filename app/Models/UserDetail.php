@@ -10,4 +10,12 @@ class UserDetail extends Model {
     public function user() {
         return $this->belongsTo(\App\User::class);
     }
+
+    public function position() {
+        return $this->belongsTo(\App\Models\Position::class);
+    }
+    
+    public function department() {
+        return $this->belongsTo(\App\Models\Department::class);
+    }
 }

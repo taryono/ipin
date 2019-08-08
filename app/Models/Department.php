@@ -10,8 +10,8 @@ class Department extends Model {
     public $guarded = ['id'];
     protected $dates = ['deleted_at']; 
     
-    public function user() {
-        return $this->hasMany(\App\User::class);
+    public function user_detail() {
+        return $this->hasMany(\App\Models\UserDetail::class);
     } 
     
     public function request_order() {

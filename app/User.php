@@ -37,11 +37,7 @@ class User extends Authenticatable {
     public function request_order() {
         return $this->hasMany(\App\Models\RequestOrder::class);
     }
-    
-    public function position() {
-        return $this->belongsTo(\App\Models\Position::class);
-    }
-
+     
     public function isAdmin() {
         $role = $this->roles()->first();   
         if($role){
