@@ -40,7 +40,7 @@ class GoodsController extends Controller {
         $goods_codes = \App\Models\GoodsCode::all();
         $types = \App\Models\Type::all();
         $departments = \App\Models\Department::all();
-        return view('employee.goods.create', compact('categories', 'suppliers', 'packages', 'goods_codes','departments','types'));
+        return view('employee.goods.create', compact('categories', 'suppliers', 'packages','departments','types'));
     }
 
     /**
@@ -51,20 +51,22 @@ class GoodsController extends Controller {
      */
     public function store(Request $request) {
         try {
-            $goods = Goods::create([
-                        'goods_code_id' => $request->input('goods_code_id'),
+            
+            $goods = Goods::create([ 
                         'name' => $request->input('name'),
                         'description' => $request->input('description'),
                         'supplier_id' => $request->input('supplier_id'),
                         'category_id' => $request->input('category_id'),
                         'package_id' => $request->input('package_id'),
                         'department_id' => $request->input('department_id'),
-                        'type_id' => $request->input('type_id'),
+                        #'type_id' => $request->input('type_id'),
                         'amount' => $request->input('amount'),
                         'min_amount' => $request->input('min_amount'),
                         'price' => $request->input('price'),
                         'request_limit' => $request->input('request_limit'),
             ]);
+            $goods->code = $goods->category->code.$goods->supplier->code.((date('n') < 10)?'0'.date('n'):date('n')).date('y');
+            $goods->save();
             $this->validate($request, [
                 'name' => 'required',
                 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -99,9 +101,8 @@ class GoodsController extends Controller {
         $goods = \App\Models\Goods::find($id);
         $categories = \App\Models\Category::all();
         $suppliers = \App\Models\Supplier::all();
-        $packages = \App\Models\Package::all();
-        $goods_codes = \App\Models\GoodsCode::where('id', $goods->goods_code_id)->get();
-        return view('employee.goods.view', compact('categories', 'suppliers', 'packages', 'goods', 'goods_codes'));
+        $packages = \App\Models\Package::all(); 
+        return view('employee.goods.view', compact('categories', 'suppliers', 'packages', 'goods'));
     }
 
     /**
@@ -114,11 +115,10 @@ class GoodsController extends Controller {
         $goods = \App\Models\Goods::find($id);
         $categories = \App\Models\Category::all();
         $suppliers = \App\Models\Supplier::all();
-        $packages = \App\Models\Package::all();
-        $goods_codes = \App\Models\GoodsCode::all();
+        $packages = \App\Models\Package::all(); 
         $types = \App\Models\Type::all();
         $departments = \App\Models\Department::all();
-        return view('employee.goods.edit', compact('categories', 'suppliers', 'packages', 'goods', 'goods_codes','departments','types'));
+        return view('employee.goods.edit', compact('categories', 'suppliers', 'packages', 'goods','departments','types'));
     }
 
     /**
@@ -131,21 +131,22 @@ class GoodsController extends Controller {
     public function update(Request $request, $id) {
 
         try {
-            $goods = Goods::find($id);
-            $goods->update([
-                'goods_code_id' => $request->input('goods_code_id'),
+            $goods = Goods::find($id); 
+            $goods->update([ 
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'supplier_id' => $request->input('supplier_id'),
                 'category_id' => $request->input('category_id'),
                 'package_id' => $request->input('package_id'),
                 'department_id' => $request->input('department_id'),
-                'type_id' => $request->input('type_id'),
+                #'type_id' => $request->input('type_id'),
                 'amount' => $request->input('amount'),
                 'min_amount' => $request->input('min_amount'),
                 'price' => $request->input('price'),
                 'request_limit' => $request->input('request_limit'),
             ]);
+            $goods->code = $goods->category->code.$goods->supplier->code.((date('n') < 10)?'0'.date('n'):date('n')).date('y');
+            $goods->save();
             if ($request->file('image')) {
                 $this->validate($request, [
                     'name' => 'required',
@@ -183,6 +184,7 @@ class GoodsController extends Controller {
     public function destroy($id) {
         $goods = \App\Models\Goods::find($id);
         if ($goods) {
+
             return response()->json(['success' => $goods->delete(), 'msg' => 'Hapus data barang berhasil', 'redirect' => route('goods.index')], 200);
         }
         abort(404);

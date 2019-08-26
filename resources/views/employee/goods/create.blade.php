@@ -1,21 +1,5 @@
 <form class="form-horizontal" method="POST" action="{{ route('goods.store') }}" enctype="multipart/form-data">
-    {{ csrf_field() }}
-    <div class="form-group{{ $errors->has('goods_code_id') ? ' has-error' : '' }}">
-        <label for="goods_code_id" class="col-md-4 control-label">Kode Barang</label>
-        <div class="col-md-6">
-            <select name="goods_code_id" class="form-control" id="example-getting-started">
-                @foreach($goods_codes as $goods_code)
-                <option value="{{$goods_code->id}}">{{$goods_code->code}}</option>
-                @endforeach
-            </select>
-
-            @if ($errors->has('goods_code_id'))
-            <span class="help-block">
-                <strong>{{ $errors->first('goods_code_id') }}</strong>
-            </span>
-            @endif
-        </div>
-    </div>
+    {{ csrf_field() }} 
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
         <label for="name" class="col-md-4 control-label">Nama</label>
 
@@ -67,7 +51,7 @@
             @endif
         </div>
     </div>
-    <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
+    <!--div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
         <label for="type_id" class="col-md-4 control-label">Tipe</label>
         <div class="col-md-6">
             <select name="type_id" class="form-control" id="example-getting-started">
@@ -82,7 +66,7 @@
             </span>
             @endif
         </div>
-    </div>
+    </div-->
     <div class="form-group">
         <label for="supplier" class="col-md-4 control-label">Supplier</label> 
         <div class="col-md-6">

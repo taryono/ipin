@@ -20,7 +20,8 @@ class GoodsCodeController extends EmployeeController {
 
     public function create(Request $request) {
         $goods_types = \App\Models\GoodsType::all();
-        return view('employee.goods_code.create', compact('goods_types'));
+        $goods_categories = \App\Models\Category::all();
+        return view('employee.goods_code.create', compact('goods_types','goods_categories'));
     }
 
     public function store(Request $request) {
@@ -28,6 +29,7 @@ class GoodsCodeController extends EmployeeController {
                     'name' => $request->input('name'),
                     'code' => $request->input('code'), 
                     'goods_type_id' => $request->input('goods_type_id'), 
+                    'category_id' => $request->input('category_id'), 
         ]);
         if ($goods_code) {
            return response()->json(['status'=> 'success','msg'=> 'Input kode barang success','redirect'=> route('goods_code.index')]);
@@ -38,8 +40,9 @@ class GoodsCodeController extends EmployeeController {
     public function edit($id) {
         $goods_code = \App\Models\GoodsCode::find($id); 
         $goods_types = \App\Models\GoodsType::all();
+        $goods_categories = \App\Models\Category::all();
         if ($goods_code) {
-            return view('employee.goods_code.edit', compact('goods_code','goods_types'));
+            return view('employee.goods_code.edit', compact('goods_code','goods_types','goods_categories'));
         }
     }
     
@@ -50,6 +53,7 @@ class GoodsCodeController extends EmployeeController {
                 'name'=>  $request->input('name'),
                 'code'=> $request->input('code'),
                 'goods_type_id' => $request->input('goods_type_id'), 
+                'category_id' => $request->input('category_id'), 
             ]); 
             return response()->json(['status'=> 'success','msg'=> 'Update kode barang berhasil','redirect'=> route('goods_code.index')],200);
         }else{

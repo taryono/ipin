@@ -1,9 +1,14 @@
+<style>
+#code{
+    text-transform: uppercase;
+}
+</style>
 <form class="form-horizontal" method="POST" action="{{ route('category.store') }}">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
         <label for="code" class="col-md-4 control-label">Kode</label>
         <div class="col-md-6">
-            <input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" required autofocus maxlength="5"  style="width: 60px;">
+            <input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" required autofocus maxlength="2"  style="width: 60px;">
 
             @if ($errors->has('code'))
             <span class="help-block">

@@ -1,3 +1,9 @@
+<style>
+#code{
+    text-transform: uppercase;
+}
+</style>
+
 <form class="form-horizontal" method="POST" action="{{ route('supplier.update', $supplier->id) }}">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">

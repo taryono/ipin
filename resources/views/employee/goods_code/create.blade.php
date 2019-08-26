@@ -1,9 +1,9 @@
 <form class="form-horizontal" method="POST" action="{{ route('goods_code.store') }}">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
-        <label for="code" class="col-md-4 control-label">Kode Barang</label>
+        <label for="code" class="col-md-4 control-label">Kode</label>
         <div class="col-md-6">
-            <input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" required autofocus maxlength="4" style="width: 60px;">
+            <input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" required autofocus maxlength="2" style="width: 60px;">
 
             @if ($errors->has('code'))
             <span class="help-block">
@@ -29,6 +29,26 @@
             @endif 
             @else 
             Tipe barang belum dibuat
+            @endif
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+        <label for="category_id" class="col-md-4 control-label">Kategori</label>
+
+        <div class="col-md-6">
+            @if($goods_categories->count() > 0)
+            <select name="category_id" class="form-control example-getting-started">  
+                @foreach($goods_categories as $goods_category)
+                <option value="{{$goods_category->id}}">{{$goods_category->name}}</option>
+                @endforeach
+            </select>
+            @if ($errors->has('category_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('category_id') }}</strong>
+            </span>
+            @endif 
+            @else 
+            Kategori barang belum dibuat
             @endif
         </div>
     </div>

@@ -36,6 +36,7 @@ class RequestOrderController extends Controller {
     public function create() {
         if (Auth()->user()->isAdmin()) {
             $departments = \App\Models\Department::where('id', '<>', 1)->get();
+            $department_from = \App\Models\Department::all();
         } else {
             $departments = \App\Models\Department::where('id', '<>', 1)->get();
             $department_from = \App\Models\Department::where('id', Auth()->user()->user_detail->department_id)->get();
